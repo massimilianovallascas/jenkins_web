@@ -13,23 +13,16 @@ pipeline {
         echo "Building"
         helloVariable("Massi")
         script {
-          utils.printFromFunction()
+          utils.replaceString()
         }
       }
     }
 
     stage("Test") {
-      parallel {
-        stage("Test on Linux") {
-          steps {
-            echo "Testing on Linux"
-          }
-        }
-        stage("Test on Windows") {
-          steps {
-            echo "Testing on Windows"
-          }
-        }
+      steps {
+        sh """
+          bash test.sh
+        """
       }
     }
 

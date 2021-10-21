@@ -12,13 +12,19 @@ pipeline {
       }
     }
 
-    stage("Test") {
+    stage("Test on Linux") {
       steps {
-        echo "Testing"
+        echo "Testing on Linux"
       }
     }
 
 
+   stage("Test on Windows") {
+      steps {
+        echo "Testing on Windows"
+      }
+    }
+    
     stage("Deploy") {
       steps {
         echo "Deploying"

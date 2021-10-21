@@ -3,7 +3,7 @@ pipeline {
   agent any
   
   options {
-    timestamp()
+    timestamps()
   }
   
   stages {

@@ -12,6 +12,9 @@ pipeline {
       steps {
         echo "Building"
         helloVariable("Massi")
+        script {
+          utils.printFromFunction()
+        }
       }
     }
 

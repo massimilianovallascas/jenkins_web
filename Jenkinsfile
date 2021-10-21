@@ -21,7 +21,7 @@ pipeline {
     stage("Test") {
       steps {
         sh """
-          bash test.sh
+          bash test.sh "<p><small>Deployed by Jenkins job: ${BUILD_NUMBER}</small></p>"
         """
       }
     }

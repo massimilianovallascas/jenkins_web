@@ -1,15 +1,20 @@
 pipeline {
-  
   agent any
   
   options {
     timestamps()
   }
-  
+
   stages {
     stage("My first stage") {
       steps {
-        echo "THis is a step in my first stage"
+        echo "This is a step in my first stage!"
+      }
+    }
+
+    stage("Print environment variables") {
+      steps {
+        sh 'printenv'
       }
     }
   }

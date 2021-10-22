@@ -19,7 +19,8 @@ pipeline {
     stage("Build") {
       steps {
         echo "Building"
-        echo "${GITHUB}"
+        echo "${GITHUB_USR}"
+        echo "${GITHUB_PWD}"
         echo "${params.Name}"
         helloVariable("Massi")
         script {

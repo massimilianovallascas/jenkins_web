@@ -26,6 +26,9 @@ pipeline {
         helloVariable("Massi")
         script {
           utils.replaceString()
+          sh """
+            mkdir -p docker
+          """
         }
       }
     }

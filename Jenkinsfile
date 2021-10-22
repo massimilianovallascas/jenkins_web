@@ -20,8 +20,10 @@ pipeline {
 
     stage("Test") {
       steps {
+        echo "Testing"
         sh """
-          bash test.sh "<p><small>Deployed by Jenkins job: ${BUILD_NUMBER}</small></p>"
+          chmod +x test.sh
+          ./test.sh ${env.BUILD_NUMBER}
         """
       }
     }
@@ -29,6 +31,29 @@ pipeline {
     stage("Deploy") {
       steps {
         echo "Deploying"
+        sshPublisher(
+          publishers: [
+            sshPublisherDesc(
+              configName: 'http', 
+              transfers: [
+                sshTransfer(
+                  cleanRemote: false, excludes: '', 
+                  execCommand: 'mv index.html /var/www/html/index.html', 
+                  execTimeout: 120000, 
+                  flatten: false, 
+                  makeEmptyDirs: false, 
+                  noDefaultExcludes: false, 
+                  patternSeparator: '[, ]+', 
+                  remoteDirectory: '', 
+                  remoteDirectorySDF: false, 
+                  removePrefix: '', 
+                  sourceFiles: 'index.html'
+                )
+              ], 
+              usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false
+            )
+          ]
+        )
       }
     }
   }

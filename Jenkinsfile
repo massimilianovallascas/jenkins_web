@@ -8,7 +8,7 @@ pipeline {
   }
 
   environment {
-    GITHUB = credentials("github")
+    GITHUB = credentials("gitcredentials")
   }
   
   parameters {

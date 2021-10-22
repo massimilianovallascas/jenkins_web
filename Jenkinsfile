@@ -7,10 +7,20 @@ pipeline {
     timestamps()
   }
 
+  environment {
+    MYENVVAR = "testenvvar"
+  }
+  
+  parameters {
+    string(name: 'Name', defaultValue: 'Massi', description: 'Your name')
+  }
+  
   stages {
     stage("Build") {
       steps {
         echo "Building"
+        echo "${MYENVVAR}"
+        echo "${params.Name}"
         helloVariable("Massi")
         script {
           utils.replaceString()
@@ -55,6 +65,14 @@ pipeline {
           ]
         )
       }
+    }
+  }
+  post {
+    always {
+      archiveArtifacts artifacts: 'index.html', fingerprint: true, followSymlinks: false
+    }
+    cleanup {
+      cleanWs()
     }
   }
 }

@@ -20,7 +20,7 @@ pipeline {
       steps {
         echo "Building"
         echo "${GITHUB_USR}"
-        echo "${GITHUB_PWD}"
+        echo "${GITHUB_PSW}"
         echo "${params.Name}"
         helloVariable("Massi")
         script {

@@ -30,6 +30,21 @@ pipeline {
       }
     }
 
+    stage("Docker build") {
+      agent {
+        docker {
+          image "node:latest"
+          args "-v ${WORKSPACE}/docker:/home/node"
+        }
+      }
+      steps {
+        sh """
+          node --version > /home/node/docker_node_version
+          npm --version > /home/node/docker_npm_version
+        """
+      }
+    }
+
     stage("Test") {
       steps {
         echo "Testing"
@@ -73,8 +88,8 @@ pipeline {
     always {
       archiveArtifacts artifacts: 'index.html', fingerprint: true, followSymlinks: false
     }
-    cleanup {
-      cleanWs()
-    }
+//     cleanup {
+//       cleanWs()
+//     }
   }
 }

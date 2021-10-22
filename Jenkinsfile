@@ -8,7 +8,7 @@ pipeline {
   }
 
   environment {
-    MYENVVAR = "testenvvar"
+    GITHUB = credentials("github")
   }
   
   parameters {
@@ -19,7 +19,7 @@ pipeline {
     stage("Build") {
       steps {
         echo "Building"
-        echo "${MYENVVAR}"
+        echo "${GITHUB}"
         echo "${params.Name}"
         helloVariable("Massi")
         script {

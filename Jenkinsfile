@@ -90,8 +90,8 @@ pipeline {
     always {
       archiveArtifacts artifacts: 'index.html', fingerprint: true, followSymlinks: false
     }
-//     cleanup {
-//       cleanWs()
-//     }
+    cleanup {
+      cleanWs()
+    }
   }
 }

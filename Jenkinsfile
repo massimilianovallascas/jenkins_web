@@ -35,18 +35,17 @@ pipeline {
 
     stage("Docker build") {
       agent {
-        docker {
-          image "node:latest"
-          args "-v ${WORKSPACE}/docker:/home/node"
+        docker { 
+           image "python:latest"
+           args  "-v ${WORKSPACE}/docker:/home/python"
+         }
+      }
+          steps {
+            sh """
+              python --version > /home/python/docker_python_version
+            """
+          }
         }
-      }
-      steps {
-        sh """
-          node --version > /home/node/docker_node_version
-          npm --version > /home/node/docker_npm_version
-        """
-      }
-    }
 
     stage("Test") {
       steps {
